@@ -7,6 +7,15 @@ public class Tile : MonoBehaviour
 
     public Point GridPosition { get; set; }
 
+    public Vector2 WorldPosition
+    {
+        get
+        {
+            return GetComponent<SpriteRenderer>().bounds.center;
+        }
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {

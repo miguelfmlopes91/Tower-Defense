@@ -16,9 +16,17 @@ public class LevelManager : MonoBehaviour
         get {return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
 
+    private Point BlueSpawn;
+    private Point RedSpawn;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject BluePortal;
+    [SerializeField]
+    private GameObject RedPortal;
+
+
+// Start is called before the first frame update
+void Start()
     {
         CreateLevel();
     }
@@ -53,6 +61,8 @@ public class LevelManager : MonoBehaviour
         maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
 
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+
+        SpawnPortals();
     }
 
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStart) {
@@ -71,5 +81,13 @@ public class LevelManager : MonoBehaviour
         string data = bindData.text.Replace(Environment.NewLine, string.Empty);
 
         return data.Split('-');       
+    }
+
+    private void SpawnPortals() {
+        BlueSpawn = new Point(0, 0);
+
+        Instantiate(BluePortal, Tiles[BlueSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
+
+        RedSpawn = new Point(0, 0);
     }
 }
