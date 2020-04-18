@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5498792084377952861}
   - component: {fileID: 6215240030096304760}
+  - component: {fileID: -4601522147516042354}
   m_Layer: 0
   m_Name: grass_tile_1
   m_TagString: Untagged
@@ -81,3 +82,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4601522147516042354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8511373481624792967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386c2a533fa5d44c083868196a5ee1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
