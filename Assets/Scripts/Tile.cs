@@ -32,5 +32,7 @@ public class Tile : MonoBehaviour
         this.GridPosition = gridPos;
         transform.position = worldPosition;
 
+        LevelManager.Instance.Tiles.Add(gridPos, this);
+
     }
 }

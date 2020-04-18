@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]
     private GameObject[] tilePrefabs;
@@ -71,7 +71,6 @@ void Start()
 
         newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
 
-        Tiles.Add(new Point(x, y), newTile);
     }
 
     private string[] ReadFile() {
@@ -88,6 +87,9 @@ void Start()
 
         Instantiate(BluePortal, Tiles[BlueSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
 
-        RedSpawn = new Point(0, 0);
+        RedSpawn = new Point(16, 6);
+
+        Instantiate(RedPortal, Tiles[RedSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
+
     }
 }
