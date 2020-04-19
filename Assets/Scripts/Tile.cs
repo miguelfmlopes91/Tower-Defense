@@ -34,4 +34,13 @@ public class Tile : MonoBehaviour
         LevelManager.Instance.Tiles.Add(gridPos, this);
 
     }
+
+    private void OnMouseOver()
+    {
+        PlaceTower();
+    }
+
+    private void PlaceTower() {
+        Instantiate(GameManager.Instance.TowerPrefab, transform.position, Quaternion.identity);
+    }
 }
