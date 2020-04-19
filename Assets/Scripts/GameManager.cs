@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private TowerButton towerClickButton;
 
+
     public TowerButton TowerClickButton
     {
         get {
@@ -27,9 +28,11 @@ public class GameManager : Singleton<GameManager>
 
     public void PickTower(TowerButton tower) {
         towerClickButton = tower;
+        Hover.Instance.Activate(tower.TowerSprite);
     }
 
     public void BuyTower() {
         towerClickButton = null;
+        Hover.Instance.Deactivate();
     }
 }
