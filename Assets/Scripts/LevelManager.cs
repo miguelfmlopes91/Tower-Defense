@@ -70,7 +70,7 @@ void Start()
 
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStart) {
         int tileIndex = int.Parse(tileType);
-        Tile newTile = Instantiate(tilePrefabs[tileIndex-1]).GetComponent<Tile>();//martelada
+        Tile newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<Tile>();//martelada
 
         newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), mapParent);
 
