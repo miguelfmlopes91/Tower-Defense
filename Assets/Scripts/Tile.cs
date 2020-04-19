@@ -35,12 +35,18 @@ public class Tile : MonoBehaviour
 
     }
 
-    private void OnMouseOver()
+    private void OnMouseDown()
     {
         PlaceTower();
     }
 
+   
+
     private void PlaceTower() {
-        Instantiate(GameManager.Instance.TowerPrefab, transform.position, Quaternion.identity);
+        GameObject tower = Instantiate(GameManager.Instance.TowerPrefab, transform.position, Quaternion.identity);
+
+        tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y;
+
+        tower.transform.SetParent(transform);
     }
 }
