@@ -9,6 +9,9 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject[] tilePrefabs;
     [SerializeField]
     private CameraMovement cameraMovement;
+    [SerializeField]
+    private Transform mapParent;
+
 
     public Dictionary<Point, Tile> Tiles { get; set; }
 
@@ -69,7 +72,7 @@ void Start()
         int tileIndex = int.Parse(tileType);
         Tile newTile = Instantiate(tilePrefabs[tileIndex-1]).GetComponent<Tile>();//martelada
 
-        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
+        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), mapParent);
 
     }
 

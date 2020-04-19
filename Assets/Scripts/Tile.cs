@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-
     public Point GridPosition { get; set; }
 
     public Vector2 WorldPosition
@@ -28,10 +27,10 @@ public class Tile : MonoBehaviour
         
     }
 
-    public void Setup(Point gridPos, Vector3 worldPosition) {
+    public void Setup(Point gridPos, Vector3 worldPosition, Transform parent) {
         this.GridPosition = gridPos;
         transform.position = worldPosition;
-
+        transform.SetParent(parent);
         LevelManager.Instance.Tiles.Add(gridPos, this);
 
     }
