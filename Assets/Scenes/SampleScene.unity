@@ -530,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerButtonPrefab: {fileID: 1350106720365634, guid: 8b2c7bdbc016bbc46a5631cd524c3989,
     type: 3}
+  towerSprite: {fileID: 21300000, guid: 196fbd7d6ba84b34c853a920a6eac0c0, type: 3}
 --- !u!1 &800133247
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerButtonPrefab: {fileID: 1489554011767932, guid: 55114bbc4ec1f404485f566a724fd9d1,
     type: 3}
+  towerSprite: {fileID: 21300000, guid: b9f20953b1138c045b5b696d1091afaa, type: 3}
 --- !u!1 &1134729951
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7eed70e2aa66475f998c8c5a316b713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerClickButton: {fileID: 0}
 --- !u!4 &1507019851
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerButtonPrefab: {fileID: 1665565121497846, guid: 8ee0c91266e02c54797c22c8fc4bf535,
     type: 3}
+  towerSprite: {fileID: 21300000, guid: 09fe80c5eadd29641bab83652999af68, type: 3}
 --- !u!1 &1755412975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -44.700012, y: -179.39}
+  m_AnchoredPosition: {x: -44.700195, y: -179.3899}
   m_SizeDelta: {x: 111.7, y: 388.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1755412977
@@ -1112,7 +1114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 0
-    m_Right: 5
+    m_Right: 15
     m_Top: 0
     m_Bottom: 5
   m_ChildAlignment: 8
@@ -1277,3 +1279,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerButtonPrefab: {fileID: 1278069242340166, guid: 642b4375ea495894481c11bfa7aebeea,
     type: 3}
+  towerSprite: {fileID: 21300000, guid: 96a6692f01d4fc14295d3420405dd688, type: 3}

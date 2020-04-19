@@ -7,6 +7,8 @@ public class Tile : MonoBehaviour
 {
     public Point GridPosition { get; set; }
 
+    public bool IsEmpty { get; private set; }
+
     public Vector2 WorldPosition
     {
         get
@@ -16,10 +18,17 @@ public class Tile : MonoBehaviour
 
     }
 
+
+    private Color32 fullColor   = new Color32(255, 118, 118, 255);
+    private Color32 emptyColor  = new Color32(96, 255, 90, 255);
+
+    private SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        IsEmpty = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -36,15 +45,33 @@ public class Tile : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.TowerClickButton != null)
         {
-            PlaceTower();
+            if (IsEmpty)
+            {
+                ColorTile(emptyColor);
+            }
+
+            if (!IsEmpty)
+            {
+                ColorTile(fullColor);
+
+            }
+            else if (Input.GetMouseButtonDown(0))
+            {
+                PlaceTower();
+            }
         }
     }
 
-   
+    private void OnMouseExit()
+    {
+        ColorTile(Color.white);   
+    }
+
+
 
     private void PlaceTower() {
         GameObject tower = Instantiate(GameManager.Instance.TowerClickButton.TowerButtonPrefab, transform.position, Quaternion.identity);
@@ -53,7 +80,17 @@ public class Tile : MonoBehaviour
 
         tower.transform.SetParent(transform);
 
+        IsEmpty = false;
+
+        ColorTile(Color.white);
+
         GameManager.Instance.BuyTower();
 
+    }
+
+
+    private void ColorTile(Color32 newColor)
+    {
+        spriteRenderer.color = newColor;
     }
 }
