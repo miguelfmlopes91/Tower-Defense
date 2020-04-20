@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
-    
+    private int currency;
+
+    [SerializeField]
+    private Text currencyText;
 
 
     public TowerButton TowerClickButton
