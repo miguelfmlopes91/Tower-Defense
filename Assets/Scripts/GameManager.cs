@@ -7,6 +7,8 @@ public class GameManager : Singleton<GameManager>
 {
     private int currency;
 
+
+
     [SerializeField]
     private Text currencyText;
 
@@ -15,10 +17,17 @@ public class GameManager : Singleton<GameManager>
     {
         get;set;
     }
+    public int Currency { get => currency;
+        set {
+            currency = value;
+            currencyText.text = value.ToString() + "<color=lime>$</color>";
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Currency = 5;
     }
 
     // Update is called once per frame
@@ -28,12 +37,21 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void PickTower(TowerButton tower) {
-        TowerClickButton = tower;
-        Hover.Instance.Activate(tower.TowerSprite);
+
+        if (currency>=tower.Price)
+        {
+            TowerClickButton = tower;
+            Hover.Instance.Activate(tower.TowerSprite);
+        }
+
     }
 
     public void BuyTower() {
-        Hover.Instance.Deactivate();
+        if (Currency >= TowerClickButton.Price)
+        {
+            Currency -= TowerClickButton.Price;
+            Hover.Instance.Deactivate();
+        }
     }
 
     private void HandleEscape()
