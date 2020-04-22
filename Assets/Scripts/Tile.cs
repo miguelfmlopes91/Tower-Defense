@@ -15,20 +15,21 @@ public class Tile : MonoBehaviour
         {
             return GetComponent<SpriteRenderer>().bounds.center;
         }
-
     }
 
 
     private Color32 fullColor   = new Color32(255, 118, 118, 255);
     private Color32 emptyColor  = new Color32(96, 255, 90, 255);
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer { get; set; }
+
+    public bool Debugging { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
         IsEmpty = true;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -49,12 +50,12 @@ public class Tile : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.TowerClickButton != null)
         {
-            if (IsEmpty)
+            if (IsEmpty && !Debugging)
             {
                 ColorTile(emptyColor);
             }
 
-            if (!IsEmpty)
+            if (!IsEmpty && !Debugging)
             {
                 ColorTile(fullColor);
 
@@ -68,7 +69,10 @@ public class Tile : MonoBehaviour
 
     private void OnMouseExit()
     {
-        ColorTile(Color.white);   
+        if (!Debugging)
+        {
+            ColorTile(Color.white);
+        }
     }
 
 
@@ -91,6 +95,6 @@ public class Tile : MonoBehaviour
 
     private void ColorTile(Color32 newColor)
     {
-        spriteRenderer.color = newColor;
+        SpriteRenderer.color = newColor;
     }
 }
