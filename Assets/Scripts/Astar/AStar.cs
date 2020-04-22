@@ -28,6 +28,29 @@ public static class AStar
 
         openList.Add(currentNode);
 
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                Point neighboursPosition = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
+
+
+                if (LevelManager.Instance.InBounds(neighboursPosition) &&
+                    LevelManager.Instance.Tiles[neighboursPosition].walkable &&
+                    neighboursPosition != currentNode.GridPosition)
+                {
+                    Node neighbour = nodeDict[neighboursPosition];
+                }
+            }
+        }
+
+
+
+
+
+
+
         //** DEBUGGING **//
         GameObject.Find("AStarDebugger").GetComponent<AStarDebuggar>().DebugPath(openList);
 

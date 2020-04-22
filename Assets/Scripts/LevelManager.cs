@@ -28,6 +28,8 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject RedPortal;
 
 
+    private Point Mapsize;
+
 // Start is called before the first frame update
 void Start()
     {
@@ -48,6 +50,8 @@ void Start()
 
         int mapX = mapData[0].ToCharArray().Length;
         int mapY = mapData.Length;
+
+        Mapsize = new Point(mapX, mapY);
 
         Vector3 maxTile = Vector3.zero;
 
@@ -94,5 +98,10 @@ void Start()
 
         Instantiate(RedPortal, Tiles[RedSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
 
+    }
+
+    public bool InBounds(Point Position)
+    {
+        return Position.X >= 0 && Position.Y >= 0 && Position.Y < Mapsize.Y && Position.X < Mapsize.X;
     }
 }

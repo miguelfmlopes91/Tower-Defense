@@ -23,12 +23,13 @@ public class Tile : MonoBehaviour
 
     public SpriteRenderer SpriteRenderer { get; set; }
 
+    public bool walkable { get; set; }
+
     public bool Debugging { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        IsEmpty = true;
         SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -39,7 +40,9 @@ public class Tile : MonoBehaviour
     }
 
     public void Setup(Point gridPos, Vector3 worldPosition, Transform parent) {
-        this.GridPosition = gridPos;
+        walkable = true;
+        IsEmpty = true;
+        GridPosition = gridPos;
         transform.position = worldPosition;
         transform.SetParent(parent);
         LevelManager.Instance.Tiles.Add(gridPos, this);
@@ -89,6 +92,8 @@ public class Tile : MonoBehaviour
         ColorTile(Color.white);
 
         GameManager.Instance.BuyTower();
+
+        walkable = false;
 
     }
 

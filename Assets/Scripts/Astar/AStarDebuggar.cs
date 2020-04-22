@@ -53,7 +53,7 @@ public class AStarDebuggar : MonoBehaviour
     {
         foreach (Node node in openList)
         {
-            node.TileRef.SpriteRenderer.color = Color.black;
+            node.TileRef.SpriteRenderer.color = Color.cyan;
 
         }
     }
