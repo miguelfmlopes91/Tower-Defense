@@ -42,6 +42,10 @@ public static class AStar
                     LevelManager.Instance.Tiles[neighboursPosition].walkable &&
                     neighboursPosition != currentNode.GridPosition)
                 {
+
+                    //10 cost for normal and 14 for diagonal
+                    int gCost = Mathf.Abs(x-y) == 1 ? 10 : 14;
+
                     //3 Adds neighbours to the open list
                     Node neighbour = nodeDict[neighboursPosition];
                     //* only for debugging*//
@@ -51,7 +55,7 @@ public static class AStar
                         openList.Add(neighbour);
                     }
                     // 4. Calculate all the values for the neighbours
-                    neighbour.CalcValues(currentNode);
+                    neighbour.CalcValues(currentNode, gCost);
                 }
             }
         }

@@ -11,14 +11,17 @@ public class Node
 
     public Node Parent { get; private set; }
 
+    public int G { get; set; }
+
     public Node(Tile tileRef)
     {
         TileRef = tileRef;
         GridPosition = TileRef.GridPosition;
     }
 
-    public void CalcValues(Node parent)
+    public void CalcValues(Node parent ,int gCost)
     {
         Parent = parent;
+        G = parent.G + gCost;
     }
 }
