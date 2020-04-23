@@ -24,11 +24,14 @@ public static class AStar
 
         HashSet<Node> openList = new HashSet<Node>();
 
+        HashSet<Node> closedList = new HashSet<Node>();
+
         Node currentNode = nodeDict[start];
 
+        //1 Adds the start node to the openlist
         openList.Add(currentNode);
 
-
+        //2 runs trhough all neighbours
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
@@ -39,6 +42,7 @@ public static class AStar
                     LevelManager.Instance.Tiles[neighboursPosition].walkable &&
                     neighboursPosition != currentNode.GridPosition)
                 {
+                    //3 Adds neighbours to the open list
                     Node neighbour = nodeDict[neighboursPosition];
                     //* only for debugging*//
                     //neighbour.TileRef.SpriteRenderer.color = Color.black;
@@ -46,20 +50,17 @@ public static class AStar
                     {
                         openList.Add(neighbour);
                     }
-
+                    // 4. Calculate all the values for the neighbours
                     neighbour.CalcValues(currentNode);
                 }
             }
         }
 
-
-
-
-
-
+        openList.Remove(currentNode);
+        closedList.Add(currentNode);
 
         //** DEBUGGING **//
-        GameObject.Find("AStarDebugger").GetComponent<AStarDebuggar>().DebugPath(openList);
+        GameObject.Find("AStarDebugger").GetComponent<AStarDebuggar>().DebugPath(openList, closedList);
 
     }
 

@@ -9,6 +9,9 @@ public class AStarDebuggar : MonoBehaviour
 
     [SerializeField]
     private GameObject arrowPrefab;
+
+    [SerializeField]
+    private GameObject debugTilePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,30 +42,35 @@ public class AStarDebuggar : MonoBehaviour
                     if (start == null)
                     {
                         start = temp;
-                        start.SpriteRenderer.color = Color.grey;
-                        start.Debugging = true;
+                        CreateDebugTile(start.WorldPosition, new Color32(255, 135, 0, 255));
                     }
                     else if(goal == null)
                     {
                         goal = temp;
-                        goal.SpriteRenderer.color = new Color32(255, 0, 0, 255);
-                        goal.Debugging = true;
+                        CreateDebugTile(goal.WorldPosition, new Color32(255, 0, 0, 255));
                     }
                 }
             }
         }
     }
-    public void DebugPath(HashSet<Node> openList)
+    public void DebugPath(HashSet<Node> openList, HashSet<Node> closedList)
     {
         foreach (Node node in openList)
         {
             if (node.TileRef != start)
             {
-                node.TileRef.SpriteRenderer.color = new Color32(0, 254, 255,255);
-
+                CreateDebugTile(node.TileRef.WorldPosition, new Color32(0, 254, 255, 255));
             }
 
             PointToParent(node, node.TileRef.WorldPosition);
+        }
+
+        foreach (Node node in closedList)
+        {
+            if (node.TileRef != start && node.TileRef != goal)
+            {
+                CreateDebugTile(node.TileRef.WorldPosition, new Color32(255, 0, 0, 255));
+            }
         }
     }
 
@@ -114,6 +122,13 @@ public class AStarDebuggar : MonoBehaviour
                 arrow.transform.eulerAngles = new Vector3(0, 0, 315);
             }
         }
+    }
+
+    private void CreateDebugTile(Vector3 worldPos, Color32 color)
+    {
+        GameObject debugTile = Instantiate(debugTilePrefab, worldPos, Quaternion.identity);
+
+        debugTile.GetComponent<SpriteRenderer>().color = color;
     }
 
 }
