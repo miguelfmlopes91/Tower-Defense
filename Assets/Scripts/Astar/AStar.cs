@@ -35,12 +35,19 @@ public static class AStar
             {
                 Point neighboursPosition = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
 
-
                 if (LevelManager.Instance.InBounds(neighboursPosition) &&
                     LevelManager.Instance.Tiles[neighboursPosition].walkable &&
                     neighboursPosition != currentNode.GridPosition)
                 {
                     Node neighbour = nodeDict[neighboursPosition];
+                    //* only for debugging*//
+                    //neighbour.TileRef.SpriteRenderer.color = Color.black;
+                    if (!openList.Contains(neighbour))
+                    {
+                        openList.Add(neighbour);
+                    }
+
+                    neighbour.CalcValues(currentNode);
                 }
             }
         }

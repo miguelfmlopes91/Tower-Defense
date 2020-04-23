@@ -9,9 +9,16 @@ public class Node
 
     public Tile TileRef { get; private  set; }
 
+    public Node Parent { get; private set; }
+
     public Node(Tile tileRef)
     {
         TileRef = tileRef;
         GridPosition = TileRef.GridPosition;
+    }
+
+    public void CalcValues(Node parent)
+    {
+        Parent = parent;
     }
 }
