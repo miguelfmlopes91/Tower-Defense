@@ -24,7 +24,7 @@ public class AStarDebuggar : MonoBehaviour
         ClickTile();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AStar.GetPath(start.GridPosition);
+            AStar.GetPath(start.GridPosition, goal.GridPosition);
         }
     }
 
@@ -131,6 +131,9 @@ public class AStarDebuggar : MonoBehaviour
         if (node != null)
         {
             debugTile.GetComponent<DebugTile>().G.text += node.G;
+            debugTile.GetComponent<DebugTile>().H.text += node.H;
+            debugTile.GetComponent<DebugTile>().F.text += node.F;
+
         }
 
 
