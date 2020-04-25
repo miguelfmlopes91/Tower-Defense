@@ -5,14 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    #region properties
     private int currency;
-
-
-
     [SerializeField]
     private Text currencyText;
-
-
     public TowerButton TowerClickButton
     {
         get;set;
@@ -23,7 +19,14 @@ public class GameManager : Singleton<GameManager>
             currencyText.text = value.ToString() + "<color=lime>$</color>";
         }
     }
+    public ObjectPool Pool { get; set; }
 
+    #endregion
+
+    private void Awake()
+    {
+        Pool = GetComponent<ObjectPool>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -60,5 +63,36 @@ public class GameManager : Singleton<GameManager>
         {
             Hover.Instance.Deactivate();
         }
+    }
+
+    public void StartWave()
+    {
+        StartCoroutine(SpawnWave());
+    }
+
+    private IEnumerator SpawnWave()
+    {
+        int monsterIndex = Random.Range(0, 4);
+
+        string type = string.Empty;
+
+        switch (monsterIndex)
+        {
+            case 0:
+                type = "BlueMonster";
+                break;
+            case 1:
+                type = "RedMonster";
+                break;
+            case 2:
+                type = "GreenMonster";
+                break;
+            case 3:
+                type = "PurpleMonster";
+                break;
+        }
+
+        Pool.GetObject(type);//.GetComponent<Monster>();
+        yield return new WaitForSeconds(2.5f);
     }
 }
