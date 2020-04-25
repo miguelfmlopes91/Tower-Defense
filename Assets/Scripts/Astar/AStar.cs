@@ -44,12 +44,23 @@ public static class AStar
                     Point neighboursPosition = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
 
                     if (LevelManager.Instance.InBounds(neighboursPosition) &&
-                        LevelManager.Instance.Tiles[neighboursPosition].walkable &&
+                        LevelManager.Instance.Tiles[neighboursPosition].Walkable &&
                         neighboursPosition != currentNode.GridPosition)
                     {
 
                         //10 cost for normal and 14 for diagonal
-                        int gCost = Mathf.Abs(x-y) == 1 ? 10 : 14;
+                        int gCost;
+                        if (Mathf.Abs(x - y) == 1) {
+                            gCost = 10;
+                        }
+                        else
+                        {
+                            if (!ConnectedDiagonally(currentNode, nodeDict[neighboursPosition]))
+                            {
+                                continue;
+                            }
+                            gCost = 14;
+                        }
 
                         //3 Adds neighbours to the open list
                         Node neighbour = nodeDict[neighboursPosition];
@@ -94,7 +105,28 @@ public static class AStar
         }//while
 
         //** DEBUGGING **//
-        GameObject.Find("AStarDebugger").GetComponent<AStarDebuggar>().DebugPath(openList, closedList);
+        GameObject.Find("AStarDebugger").GetComponent<AStarDebuggar>().DebugPath(openList, closedList, finalPath);
 
+    }
+
+    private static bool ConnectedDiagonally(Node currentNode, Node neighbour)
+    {
+        Point direction = currentNode.GridPosition - neighbour.GridPosition;
+
+        //check first diagonal (one on the left/right)
+        Point first = new Point(currentNode.GridPosition.X + direction.X, currentNode.GridPosition.Y);
+        //check second diagonal (one on the top/bottom)
+        Point second = new Point(currentNode.GridPosition.X, currentNode.GridPosition.Y + direction.Y);
+
+        if (LevelManager.Instance.InBounds(first) && !LevelManager.Instance.Tiles[first].Walkable)
+        {
+            return false;
+        }
+        if (LevelManager.Instance.InBounds(second) && !LevelManager.Instance.Tiles[second].Walkable)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

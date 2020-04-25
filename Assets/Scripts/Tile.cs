@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
 
-    public bool walkable { get; set; }
+    public bool Walkable { get; set; }
 
     public bool Debugging { get; set; }
 
@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
     }
 
     public void Setup(Point gridPos, Vector3 worldPosition, Transform parent) {
-        walkable = true;
+        Walkable = true;
         IsEmpty = true;
         GridPosition = gridPos;
         transform.position = worldPosition;
@@ -95,7 +95,7 @@ public class Tile : MonoBehaviour
 
         GameManager.Instance.BuyTower();
 
-        walkable = false;
+        Walkable = false;
 
     }
 
