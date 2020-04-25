@@ -9,6 +9,8 @@ public class Node
 
     public Tile TileRef { get; private  set; }
 
+    public Vector2 WorldPosition { get; set; }
+
     public Node Parent { get; private set; }
 
     public int G { get; set; }
@@ -21,6 +23,7 @@ public class Node
     {
         TileRef = tileRef;
         GridPosition = TileRef.GridPosition;
+        WorldPosition = TileRef.WorldPosition;
     }
 
     public void CalcValues(Node parent, Node goal ,int gCost)

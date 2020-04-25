@@ -904,6 +904,7 @@ GameObject:
   - component: {fileID: 701970614}
   - component: {fileID: 701970613}
   - component: {fileID: 701970612}
+  - component: {fileID: 701970616}
   m_Layer: 5
   m_Name: CurrencyText
   m_TagString: Untagged
@@ -1002,6 +1003,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701970610}
   m_CullTransparentMesh: 0
+--- !u!225 &701970616
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701970610}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &747933442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,8 +1392,10 @@ MonoBehaviour:
   - {fileID: 1453710917001128, guid: e091d7c9f7d99ba4589a7e064e18590d, type: 3}
   cameraMovement: {fileID: 519420030}
   mapParent: {fileID: 1134729952}
-  BluePortal: {fileID: 1289726246753046, guid: 1fb88a85e44911d42a74e57146d848b8, type: 3}
-  RedPortal: {fileID: 1942280328878412, guid: 4f3114ae4266175468d8c5375367bcce, type: 3}
+  BluePortalPrefab: {fileID: 1289726246753046, guid: 1fb88a85e44911d42a74e57146d848b8,
+    type: 3}
+  RedPortalPrefab: {fileID: 1942280328878412, guid: 4f3114ae4266175468d8c5375367bcce,
+    type: 3}
 --- !u!4 &1269387837
 Transform:
   m_ObjectHideFlags: 0

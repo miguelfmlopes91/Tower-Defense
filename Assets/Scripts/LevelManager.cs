@@ -31,6 +31,19 @@ public class LevelManager : Singleton<LevelManager>
     private Point Mapsize;
     public Portal BluePortal { get; set; }
 
+    private Stack<Node> path;
+
+    public Stack<Node> Path {
+        get
+        {
+            if (path == null)
+            {
+                GeneratePath();
+            }
+            return new Stack<Node>(new Stack<Node>(path));
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,5 +121,11 @@ public class LevelManager : Singleton<LevelManager>
     public bool InBounds(Point Position)
     {
         return Position.X >= 0 && Position.Y >= 0 && Position.Y < Mapsize.Y && Position.X < Mapsize.X;
+    }
+
+    //For now is done on monster creation
+    public void GeneratePath()
+    {
+        path = AStar.GetPath(BlueSpawn, RedSpawn);
     }
 }
