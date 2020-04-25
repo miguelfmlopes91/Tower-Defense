@@ -23,15 +23,16 @@ public class LevelManager : Singleton<LevelManager>
     private Point RedSpawn;
 
     [SerializeField]
-    private GameObject BluePortal;
+    private GameObject BluePortalPrefab;
     [SerializeField]
-    private GameObject RedPortal;
+    private GameObject RedPortalPrefab;
 
 
     private Point Mapsize;
+    public Portal BluePortal { get; set; }
 
-// Start is called before the first frame update
-void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         CreateLevel();
     }
@@ -92,11 +93,15 @@ void Start()
     private void SpawnPortals() {
         BlueSpawn = new Point(0, 0);
 
-        Instantiate(BluePortal, Tiles[BlueSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
+        GameObject tmp = Instantiate(BluePortalPrefab, Tiles[BlueSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
+        BluePortal = tmp.GetComponent<Portal>();
+        BluePortal.name = "BluePortal";
+
+
 
         RedSpawn = new Point(16, 6);
 
-        Instantiate(RedPortal, Tiles[RedSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
+        Instantiate(RedPortalPrefab, Tiles[RedSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
 
     }
 
