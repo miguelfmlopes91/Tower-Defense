@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
@@ -11,30 +12,56 @@ public class GameManager : Singleton<GameManager>
     private Text currencyText;
     public TowerButton TowerClickButton
     {
-        get;set;
+        get; set;
     }
-    public int Currency { get => currency;
-        set {
+    public int Currency
+    {
+        get => currency;
+        set
+        {
             currency = value;
             currencyText.text = value.ToString() + "<color=lime>$</color>";
         }
     }
+    public object MyProperty { get; set; }
     public ObjectPool Pool { get; set; }
 
     private int wave = 0;
+    private int lives = 0;
     [SerializeField]
     private Text waveTxt;
-
+    [SerializeField]
+    private Text livesTxt;
     [SerializeField]
     private GameObject waveBtn;
+    [SerializeField]
+    private GameObject gameOverMenu;
+
 
     private List<Monster> activeMonsters = new List<Monster>();
 
+    private bool gameOver = false;
 
-    public bool waveActive {
+    public bool waveActive
+    {
         get
         {
             return activeMonsters.Count > 0;
+        }
+    }
+
+    public int Lives
+    {
+        get => lives;
+        set
+        {
+            lives = value;
+            livesTxt.text = value.ToString();
+            if (lives <1)
+            {
+                lives = 0;
+                GameOver();
+            }
         }
     }
 
@@ -47,18 +74,20 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        Currency = 5;
+        Lives = 1;
+        Currency = 50;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleEscape();   
+        HandleEscape();
     }
 
-    public void PickTower(TowerButton tower) {
+    public void PickTower(TowerButton tower)
+    {
 
-        if (currency>=tower.Price && !waveActive)
+        if (currency >= tower.Price && !waveActive)
         {
             TowerClickButton = tower;
             Hover.Instance.Activate(tower.TowerSprite);
@@ -66,7 +95,8 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void BuyTower() {
+    public void BuyTower()
+    {
         if (Currency >= TowerClickButton.Price)
         {
             Currency -= TowerClickButton.Price;
@@ -132,9 +162,30 @@ public class GameManager : Singleton<GameManager>
     {
         activeMonsters.Remove(monster);
 
-        if (!waveActive)
+        if (!waveActive && !gameOver)
         {
             waveBtn.SetActive(true);
         }
     }
+
+    public void GameOver()
+    {
+        if (!gameOver)
+        {
+            gameOver = true;
+            gameOverMenu.SetActive(true);
+        }
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
