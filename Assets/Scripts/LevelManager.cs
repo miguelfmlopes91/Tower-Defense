@@ -112,7 +112,7 @@ public class LevelManager : Singleton<LevelManager>
 
 
 
-        RedSpawn = new Point(16, 6);
+        RedSpawn = new Point(12, 6);
 
         Instantiate(RedPortalPrefab, Tiles[RedSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
 
