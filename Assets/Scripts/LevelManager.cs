@@ -19,7 +19,7 @@ public class LevelManager : Singleton<LevelManager>
         get {return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
 
-    private Point BlueSpawn;
+    private Point blueSpawn;
     private Point RedSpawn;
 
     [SerializeField]
@@ -43,6 +43,8 @@ public class LevelManager : Singleton<LevelManager>
             return new Stack<Node>(new Stack<Node>(path));
         }
     }
+
+    public Point BlueSpawn { get => blueSpawn; set => blueSpawn = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +106,7 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     private void SpawnPortals() {
-        BlueSpawn = new Point(0, 0);
+        blueSpawn = new Point(0, 0);
 
         GameObject tmp = Instantiate(BluePortalPrefab, Tiles[BlueSpawn].GetComponent<Tile>().WorldPosition, Quaternion.identity);
         BluePortal = tmp.GetComponent<Portal>();

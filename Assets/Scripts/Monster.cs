@@ -50,7 +50,7 @@ public class Monster : MonoBehaviour
 
         if (remove)
         {
-            Destroy(gameObject);
+            Release();
         }
     }
 
@@ -122,7 +122,15 @@ public class Monster : MonoBehaviour
     {
         if (collision.tag == "RedPortal")
         {
-            StartCoroutine(Scale(new Vector3(1,1), new Vector3(0.1f,0.1f), false));
+            StartCoroutine(Scale(new Vector3(1,1), new Vector3(0.1f,0.1f), true));
+            collision.GetComponent<Portal>().Open();
         }
+    }
+
+    private void Release()
+    {
+        IsActive = false;
+        GridPosition = LevelManager.Instance.BlueSpawn;
+        GameManager.Instance.Pool.ReleaseObject(gameObject);
     }
 }
