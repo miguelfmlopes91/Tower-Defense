@@ -23,6 +23,7 @@ public class Tile : MonoBehaviour
 
 
     private SpriteRenderer spriteRenderer;
+    private Range myTower;
 
 
     public bool Walkable { get; set; }
@@ -70,6 +71,17 @@ public class Tile : MonoBehaviour
                 PlaceTower();
             }
         }
+        else if(!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.TowerClickButton == null && Input.GetMouseButtonDown(0))
+        {
+            if (myTower!=null)
+            {
+                GameManager.Instance.SelectTower(myTower);
+            }
+            else
+            {
+                GameManager.Instance.DeselectTower();
+            }
+        }
     }
 
     private void OnMouseExit()
@@ -88,6 +100,8 @@ public class Tile : MonoBehaviour
         tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y;
 
         tower.transform.SetParent(transform);
+
+        myTower = tower.transform.GetChild(0).GetComponent<Range>();
 
         IsEmpty = false;
 

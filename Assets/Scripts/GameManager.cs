@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    private Range selectedTower;
 
     private List<Monster> activeMonsters = new List<Monster>();
 
@@ -102,6 +103,27 @@ public class GameManager : Singleton<GameManager>
             Currency -= TowerClickButton.Price;
             Hover.Instance.Deactivate();
         }
+    }
+
+    public void SelectTower(Range tower)
+    {
+        if (selectedTower != null)
+        {
+
+        }
+        selectedTower = tower;
+        selectedTower.Select();
+    }
+
+    public void DeselectTower()
+    {
+        if (selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+        //upgradePanel.SetActive(false);
+
+        selectedTower = null;
     }
 
     private void HandleEscape()
