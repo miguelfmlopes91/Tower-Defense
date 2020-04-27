@@ -213,3 +213,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326d3ec5b87b24b3fb6a9d71528b91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileType: FrostProjectile
+  attackCooldown: 3
