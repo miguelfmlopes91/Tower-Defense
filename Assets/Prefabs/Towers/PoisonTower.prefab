@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: PoisonProjectile
+  projectileSpeed: 3
   attackCooldown: 3
 --- !u!1 &1489554011767932
 GameObject:

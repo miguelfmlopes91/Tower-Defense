@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: StormProjectile
+  projectileSpeed: 3
   attackCooldown: 3
 --- !u!1 &1665565121497846
 GameObject:

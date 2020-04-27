@@ -214,4 +214,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: FrostProjectile
+  projectileSpeed: 3
   attackCooldown: 3

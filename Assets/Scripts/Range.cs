@@ -6,6 +6,8 @@ public class Range : MonoBehaviour
 {
     [SerializeField]
     private string projectileType;
+    [SerializeField]
+    private float projectileSpeed;
 
     private Monster target;
 
@@ -18,6 +20,10 @@ public class Range : MonoBehaviour
     private float attackTimer;
     [SerializeField]
     private float attackCooldown;
+
+    public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public Monster Target { get => target; set => target = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +53,12 @@ public class Range : MonoBehaviour
                 attackTimer = 0;
             }
         }
-        if (target == null && monstersQueue.Count > 0)
+        if (Target == null && monstersQueue.Count > 0)
         {
-            target = monstersQueue.Dequeue();
+            Target = monstersQueue.Dequeue();
         }
 
-        if (target != null && target.IsActive)
+        if (Target != null && Target.IsActive)
         {
             if (canAttack)
             {
@@ -66,6 +72,7 @@ public class Range : MonoBehaviour
     private void Shoot() {
         Projectile projectile = GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
         projectile.transform.position = transform.position;
+        projectile.Initialize(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,7 +88,7 @@ public class Range : MonoBehaviour
     {
         if (collision.tag == "Monster")
         {
-            target = null;
+            Target = null;
         }
     }
 }
