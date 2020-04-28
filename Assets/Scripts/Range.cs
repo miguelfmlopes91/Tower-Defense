@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Range : MonoBehaviour
 {
@@ -9,26 +10,26 @@ public class Range : MonoBehaviour
     [SerializeField]
     private float projectileSpeed;
 
-    private Monster target;
-
+    private Animator myAnimator;
+    
     private Queue<Monster> monstersQueue = new Queue<Monster>();
 
     private SpriteRenderer spriteRenderer;
 
-    private bool canAttack;
+    private bool canAttack = true;
 
     private float attackTimer;
     [SerializeField]
     private float attackCooldown;
 
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
-    public Monster Target { get => target; set => target = value; }
+    public Monster Target { get; set; }
 
-    // Start is called before the first frame update
-    void Start()
+    // Use this for initialization
+    void Awake()
     {
-        canAttack = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        myAnimator = transform.parent.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -39,6 +40,12 @@ public class Range : MonoBehaviour
 
     public void Select()
     {
+        myAnimator = transform.parent.GetComponent<Animator>();
+
+        if (myAnimator == null) {
+            print("MY ANIMATOR IS NULL");
+        }
+
         spriteRenderer.enabled = !spriteRenderer.enabled;
     }
 
@@ -53,6 +60,7 @@ public class Range : MonoBehaviour
                 attackTimer = 0;
             }
         }
+
         if (Target == null && monstersQueue.Count > 0)
         {
             Target = monstersQueue.Dequeue();
@@ -64,6 +72,7 @@ public class Range : MonoBehaviour
             {
                 Shoot();
 
+                myAnimator.SetTrigger("Attack");
                 canAttack = false;
             }
         }
