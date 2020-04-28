@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
 
     private Monster target;
     private Range parent;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,18 @@ public class Projectile : MonoBehaviour
         else if(!target.IsActive)
         {
             GameManager.Instance.Pool.ReleaseObject(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Monster")
+        {
+            if (target.gameObject == collision.gameObject)
+            {
+                target.TakeDamage(parent.Damage);
+                GameManager.Instance.Pool.ReleaseObject(gameObject);
+            }
         }
     }
 }

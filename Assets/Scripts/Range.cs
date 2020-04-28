@@ -11,7 +11,11 @@ public class Range : MonoBehaviour
     private float projectileSpeed;
 
     private Animator myAnimator;
-    
+    [SerializeField]
+    private int damage;
+
+    public int Damage { get => damage; }
+
     private Queue<Monster> monstersQueue = new Queue<Monster>();
 
     private SpriteRenderer spriteRenderer;

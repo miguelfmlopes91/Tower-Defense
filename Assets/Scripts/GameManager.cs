@@ -37,6 +37,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    private int health = 15;
+
     private Range selectedTower;
 
     private List<Monster> activeMonsters = new List<Monster>();
@@ -172,7 +174,12 @@ public class GameManager : Singleton<GameManager>
 
             Monster monster = Pool.GetObject(type).GetComponent<Monster>();
 
-            monster.Spawn();
+            monster.Spawn(health);
+
+            if (wave%3 == 0)
+            {
+                health += 5;
+            }
 
             activeMonsters.Add(monster);
 
