@@ -7,12 +7,13 @@ public class Projectile : MonoBehaviour
 
     private Monster target;
     private Range parent;
+    private Animator myAnimator;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,7 +51,10 @@ public class Projectile : MonoBehaviour
             if (target.gameObject == collision.gameObject)
             {
                 target.TakeDamage(parent.Damage);
-                GameManager.Instance.Pool.ReleaseObject(gameObject);
+
+                myAnimator.SetTrigger("Impact");
+
+                //GameManager.Instance.Pool.ReleaseObject(gameObject);
             }
         }
     }
