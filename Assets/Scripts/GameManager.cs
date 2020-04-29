@@ -36,6 +36,10 @@ public class GameManager : Singleton<GameManager>
     private GameObject waveBtn;
     [SerializeField]
     private GameObject gameOverMenu;
+    [SerializeField]
+    private GameObject upgradePanel;
+    [SerializeField]
+    private Text priceText;
 
     private int health = 15;
 
@@ -93,7 +97,7 @@ public class GameManager : Singleton<GameManager>
         if (currency >= tower.Price && !waveActive)
         {
             TowerClickButton = tower;
-            Hover.Instance.Activate(tower.TowerSprite);
+            Hover.Instance.Activate(TowerClickButton.TowerSprite);
         }
 
     }
@@ -111,10 +115,14 @@ public class GameManager : Singleton<GameManager>
     {
         if (selectedTower != null)
         {
-
+            selectedTower.Select();
         }
         selectedTower = tower;
         selectedTower.Select();
+
+        priceText.text = "+ " + (selectedTower.Price/2).ToString();
+
+        upgradePanel.SetActive(true);
     }
 
     public void DeselectTower()
@@ -123,9 +131,9 @@ public class GameManager : Singleton<GameManager>
         {
             selectedTower.Select();
         }
-        //upgradePanel.SetActive(false);
-
+        upgradePanel.SetActive(false);
         selectedTower = null;
+
     }
 
     private void HandleEscape()
@@ -217,4 +225,17 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
 
+    public void SellTower()
+    {
+        if (selectedTower != null)
+        {
+            Currency += selectedTower.Price / 2;
+
+            selectedTower.GetComponentInParent<Tile>().IsEmpty = true;
+
+            Destroy(selectedTower.transform.parent.gameObject);
+
+            DeselectTower();
+        }
+    }
 }

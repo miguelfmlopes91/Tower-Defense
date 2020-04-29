@@ -27,6 +27,7 @@ public class Range : MonoBehaviour
     private float attackCooldown;
 
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public int Price { get; set; }
     public Monster Target { get; set; }
 
     // Use this for initialization
