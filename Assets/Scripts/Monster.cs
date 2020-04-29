@@ -15,15 +15,23 @@ public class Monster : MonoBehaviour
 
     public bool IsActive;
 
+    public bool Alive
+    {
+        get =>  healthStat.CurrentValue > 0;
+    }
+
     private Animator myAnimator;
 
     [SerializeField]
     private Stat healthStat;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
         myAnimator = GetComponent<Animator>();
         healthStat.Initialize();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -34,6 +42,7 @@ public class Monster : MonoBehaviour
     public void Spawn(int health)
     {
         transform.position = LevelManager.Instance.BluePortal.transform.position;
+        healthStat.Bar.Reset();
 
         healthStat.MaxValue = health;
         healthStat.CurrentValue = healthStat.MaxValue;
@@ -124,6 +133,7 @@ public class Monster : MonoBehaviour
                 //Moving to the right
             }
         }
+
     }
 
 
@@ -134,6 +144,10 @@ public class Monster : MonoBehaviour
             StartCoroutine(Scale(new Vector3(1,1), new Vector3(0.1f,0.1f), true));
             collision.GetComponent<Portal>().Open();
             GameManager.Instance.Lives--;
+        }
+        if (collision.tag == "Itle")
+        {
+            spriteRenderer.sortingOrder = collision.GetComponent<Tile>().GridPosition.Y;
         }
     }
 

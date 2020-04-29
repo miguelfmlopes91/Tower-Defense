@@ -80,6 +80,15 @@ public class Range : MonoBehaviour
                 canAttack = false;
             }
         }
+        else if (monstersQueue.Count > 0)
+        {
+            Target = monstersQueue.Dequeue();
+        }
+
+        if (Target != null && !Target.Alive)
+        {
+            Target = null;
+        }
     }
 
     private void Shoot() {
