@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class StormTower : Range
 {
+    public override Debuff GetDebuff()
+    {
+        return new StormDebuff(Target);
+    }
+
     private void Start()
     {
-        base.Set();
+        Set();
         ElementType = ELEMENT.STORM;
     }
 }

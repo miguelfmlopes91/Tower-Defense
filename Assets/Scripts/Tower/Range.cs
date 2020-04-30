@@ -122,4 +122,6 @@ public abstract class Range : MonoBehaviour
             Target = null;
         }
     }
+
+    public abstract Debuff GetDebuff();
 }

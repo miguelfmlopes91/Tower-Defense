@@ -9,6 +9,8 @@ public class Monster : MonoBehaviour
 
     private Stack<Node> path;
 
+    private List<Debuff> debuffs = new List<Debuff>();
+
     public Point GridPosition { get; set; }
 
     private Vector3 destination;//next tile
@@ -41,6 +43,7 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
+        HandleDebuffs();
         Move();
     }
 
@@ -185,6 +188,22 @@ public class Monster : MonoBehaviour
 
                 GetComponent<SpriteRenderer>().sortingOrder--;
             }
+        }
+    }
+
+    public void AddDebuff(Debuff debuff) {
+
+        if (!debuffs.Exists(x=> x.GetType() == debuff.GetType()))
+        {
+            debuffs.Add(debuff);
+        }
+    }
+
+    private void HandleDebuffs()
+    {
+        foreach (Debuff item in debuffs)
+        {
+            item.Update();
         }
     }
 }

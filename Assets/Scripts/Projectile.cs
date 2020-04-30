@@ -55,8 +55,14 @@ public class Projectile : MonoBehaviour
 
                 myAnimator.SetTrigger("Impact");
 
+                ApplyDebuffs();
+
                 //GameManager.Instance.Pool.ReleaseObject(gameObject);
             }
         }
+    }
+
+    private void ApplyDebuffs() {
+        target.AddDebuff(parent.GetDebuff());
     }
 }
