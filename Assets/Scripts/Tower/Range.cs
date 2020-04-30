@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class Range : MonoBehaviour
+public enum ELEMENT { STORM, FIRE, ICE, POISON, NONE}
+
+public abstract class Range : MonoBehaviour
 {
     [SerializeField]
     private string projectileType;
@@ -22,6 +24,8 @@ public class Range : MonoBehaviour
 
     private bool canAttack = true;
 
+    public ELEMENT ElementType { get; protected set; }
+
     private float attackTimer;
     [SerializeField]
     private float attackCooldown;
@@ -33,8 +37,12 @@ public class Range : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        Set();
         myAnimator = transform.parent.GetComponent<Animator>();
+    }
+
+    protected void Set() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

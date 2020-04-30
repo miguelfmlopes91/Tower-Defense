@@ -170,6 +170,7 @@ MonoBehaviour:
     bar: {fileID: 5715636473383857453}
     maxVal: 0
     currentVal: 0
+  elementType: 2
 --- !u!1001 &50194112973071703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,11 +178,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4678334663962148}
     m_Modifications:
-    - target: {fileID: 8167574092140920437, guid: cfdcdd53b30738b4fa0ceb6a3c591b5c,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBarCanvas
-      objectReference: {fileID: 0}
     - target: {fileID: 3303003710811939641, guid: cfdcdd53b30738b4fa0ceb6a3c591b5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -286,6 +282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167574092140920437, guid: cfdcdd53b30738b4fa0ceb6a3c591b5c,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBarCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfdcdd53b30738b4fa0ceb6a3c591b5c, type: 3}

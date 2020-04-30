@@ -15,6 +15,8 @@ public class Monster : MonoBehaviour
 
     public bool IsActive;
 
+    private int invulnerability = 2;
+
     public bool Alive
     {
         get =>  healthStat.CurrentValue > 0;
@@ -26,6 +28,9 @@ public class Monster : MonoBehaviour
     private Stat healthStat;
 
     private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private ELEMENT elementType;
 
     private void Awake()
     {
@@ -159,10 +164,16 @@ public class Monster : MonoBehaviour
         GameManager.Instance.RemoveMonster(this);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, ELEMENT damageSrc)
     {
         if (IsActive)
         {
+            if (damageSrc == elementType)
+            {
+                damage /= invulnerability;
+                invulnerability++;
+            }
+
             healthStat.CurrentValue -= damage;
             if (healthStat.CurrentValue <= 0)
             {

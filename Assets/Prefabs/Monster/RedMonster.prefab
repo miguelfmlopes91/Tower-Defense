@@ -170,6 +170,7 @@ MonoBehaviour:
     bar: {fileID: 7183603198534496571}
     maxVal: 0
     currentVal: 0
+  elementType: 1
 --- !u!1 &9130208344034312146
 GameObject:
   m_ObjectHideFlags: 0

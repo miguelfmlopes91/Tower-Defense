@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1292501472809898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326d3ec5b87b24b3fb6a9d71528b91f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 66f85f53509a04289a51c093ed7e1747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: PoisonProjectile

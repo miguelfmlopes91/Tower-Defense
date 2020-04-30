@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     private Monster target;
     private Range parent;
     private Animator myAnimator;
-
+    private ELEMENT elementType;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
     {
         this.parent = parent;
         target = parent.Target;
+        elementType = parent.ElementType;
     }
 
     private void MoveToTarget()
@@ -50,7 +51,7 @@ public class Projectile : MonoBehaviour
         {
             if (target.gameObject == collision.gameObject)
             {
-                target.TakeDamage(parent.Damage);
+                target.TakeDamage(parent.Damage, elementType);
 
                 myAnimator.SetTrigger("Impact");
 
