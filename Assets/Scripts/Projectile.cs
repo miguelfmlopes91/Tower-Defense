@@ -63,6 +63,16 @@ public class Projectile : MonoBehaviour
     }
 
     private void ApplyDebuffs() {
+
+        if (target.ElementType != elementType)
+        {
+            float roll = Random.Range(0, 100);
+            if (roll <= parent.Proc)
+            {
+                target.AddDebuff(parent.GetDebuff());
+            }
+        }
+
         target.AddDebuff(parent.GetDebuff());
     }
 }

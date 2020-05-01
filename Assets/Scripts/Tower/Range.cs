@@ -15,7 +15,6 @@ public abstract class Range : MonoBehaviour
     private Animator myAnimator;
     [SerializeField]
     private int damage;
-
     public int Damage { get => damage; }
 
     private Queue<Monster> monstersQueue = new Queue<Monster>();
@@ -25,6 +24,10 @@ public abstract class Range : MonoBehaviour
     private bool canAttack = true;
 
     public ELEMENT ElementType { get; protected set; }
+    [SerializeField]
+    private float debuffDuration;
+    [SerializeField]
+    private float proc;
 
     private float attackTimer;
     [SerializeField]
@@ -33,6 +36,8 @@ public abstract class Range : MonoBehaviour
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
     public int Price { get; set; }
     public Monster Target { get; set; }
+    public float DebuffDuration { get => debuffDuration; set => debuffDuration = value; }
+    public float Proc { get => proc; set => proc = value; }
 
     // Use this for initialization
     void Awake()

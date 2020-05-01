@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class FireTower : Range
 {
-    public override Debuff GetDebuff()
-    {
-        return new FireDebuff(Target);
-    }
+    [SerializeField]
+    private float tickTime;
+
+    [SerializeField]
+    private float tickDamage;
 
     private void Start()
     {
-        base.Set();
+        Set();
         ElementType = ELEMENT.FIRE;
 
     }
+
+    public override Debuff GetDebuff()
+    {
+        return new FireDebuff(tickDamage, tickTime, DebuffDuration, Target);
+    }
+
 }

@@ -10,6 +10,9 @@ public class Monster : MonoBehaviour
     private Stack<Node> path;
 
     private List<Debuff> debuffs = new List<Debuff>();
+    private List<Debuff> debuffsToRemove = new List<Debuff>();
+    private List<Debuff> newDebuffs = new List<Debuff>();
+
 
     public Point GridPosition { get; set; }
 
@@ -23,6 +26,7 @@ public class Monster : MonoBehaviour
     {
         get =>  healthStat.CurrentValue > 0;
     }
+    public ELEMENT ElementType { get => elementType; set => elementType = value; }
 
     private Animator myAnimator;
 
@@ -167,11 +171,11 @@ public class Monster : MonoBehaviour
         GameManager.Instance.RemoveMonster(this);
     }
 
-    public void TakeDamage(int damage, ELEMENT damageSrc)
+    public void TakeDamage(float damage, ELEMENT damageSrc)
     {
         if (IsActive)
         {
-            if (damageSrc == elementType)
+            if (damageSrc == ElementType)
             {
                 damage /= invulnerability;
                 invulnerability++;
@@ -195,15 +199,29 @@ public class Monster : MonoBehaviour
 
         if (!debuffs.Exists(x=> x.GetType() == debuff.GetType()))
         {
-            debuffs.Add(debuff);
+            newDebuffs.Add(debuff);
         }
     }
 
     private void HandleDebuffs()
     {
+        if (newDebuffs.Count > 0)
+        {
+            debuffs.AddRange(newDebuffs);
+            newDebuffs.Clear();
+        }
+        foreach (Debuff item in debuffsToRemove)
+        {
+            debuffs.Remove(item);
+        }
         foreach (Debuff item in debuffs)
         {
             item.Update();
         }
+    }
+
+    public void RemoveDebuff(Debuff debuff)
+    {
+        debuffsToRemove.Add(debuff);
     }
 }
