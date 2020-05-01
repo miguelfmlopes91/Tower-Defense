@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public delegate void CurrencyChanged();
+
 public class GameManager : Singleton<GameManager>
 {
+
+    public event CurrencyChanged Changed;
     #region properties
     private int currency;
     [SerializeField]
@@ -21,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         {
             currency = value;
             currencyText.text = value.ToString() + "<color=lime>$</color>";
+            OnCurrencyChanged();
         }
     }
     public object MyProperty { get; set; }
@@ -108,6 +113,15 @@ public class GameManager : Singleton<GameManager>
         {
             Currency -= TowerClickButton.Price;
             Hover.Instance.Deactivate();
+        }
+    }
+
+    public void OnCurrencyChanged()
+    {
+        //if there's a listener
+        if (Changed!= null)
+        {
+            Changed();
         }
     }
 
@@ -238,4 +252,6 @@ public class GameManager : Singleton<GameManager>
             DeselectTower();
         }
     }
+
+
 }
