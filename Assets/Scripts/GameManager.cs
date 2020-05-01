@@ -49,8 +49,6 @@ public class GameManager : Singleton<GameManager>
     private GameObject statsPanel;
     [SerializeField]
     private Text statsTxt;
-    [SerializeField]
-    private Text stats;
 
     private int health = 15;
 
@@ -266,7 +264,6 @@ public class GameManager : Singleton<GameManager>
 
     public void SetTooltipText(string text)
     {
-        stats.text = text;
         statsTxt.text = text;
     }
 }

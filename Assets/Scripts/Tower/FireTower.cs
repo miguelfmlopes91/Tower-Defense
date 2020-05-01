@@ -10,6 +10,9 @@ public class FireTower : Range
     [SerializeField]
     private float tickDamage;
 
+    public float TickDamage { get => tickDamage; set => tickDamage = value; }
+    public float TickTime { get => tickTime; set => tickTime = value; }
+
     private void Start()
     {
         Set();
@@ -19,7 +22,7 @@ public class FireTower : Range
 
     public override Debuff GetDebuff()
     {
-        return new FireDebuff(tickDamage, tickTime, DebuffDuration, Target);
+        return new FireDebuff(TickDamage, TickTime, DebuffDuration, Target);
     }
 
 }

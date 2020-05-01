@@ -7,9 +7,11 @@ public class IceTower : Range
     [SerializeField]
     private float slowingFactor;
 
+    public float SlowingFactor { get => slowingFactor; set => slowingFactor = value; }
+
     public override Debuff GetDebuff()
     {
-        return new IceDebuff(slowingFactor, DebuffDuration, Target);
+        return new IceDebuff(SlowingFactor, DebuffDuration, Target);
     }
 
     private void Start()
