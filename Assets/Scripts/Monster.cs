@@ -57,6 +57,7 @@ public class Monster : MonoBehaviour
 
     public void Spawn(int health)
     {
+        debuffs.Clear();
         transform.position = LevelManager.Instance.BluePortal.transform.position;
         healthStat.Bar.Reset();
 
@@ -169,6 +170,7 @@ public class Monster : MonoBehaviour
 
     public void Release()
     {
+        debuffs.Clear();
         IsActive = false;
         GridPosition = LevelManager.Instance.BlueSpawn;
         GameManager.Instance.Pool.ReleaseObject(gameObject);

@@ -99,7 +99,7 @@ public abstract class Range : MonoBehaviour
             Target = monstersQueue.Dequeue();
         }
 
-        if (Target != null && !Target.Alive)
+        if (Target != null && !Target.Alive || Target!=null && !Target.IsActive)
         {
             Target = null;
         }
