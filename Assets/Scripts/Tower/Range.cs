@@ -33,11 +33,15 @@ public abstract class Range : MonoBehaviour
     [SerializeField]
     private float attackCooldown;
 
+    private int level;//turret level
+
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
     public int Price { get; set; }
     public Monster Target { get; set; }
     public float DebuffDuration { get => debuffDuration; set => debuffDuration = value; }
     public float Proc { get => proc; set => proc = value; }
+    public TowerUpgrade[] Upgrades { get; protected set; }
+    public int Level { get => level; set => level = value; }
 
     // Use this for initialization
     void Awake()
@@ -65,6 +69,7 @@ public abstract class Range : MonoBehaviour
         }
 
         spriteRenderer.enabled = !spriteRenderer.enabled;
+
     }
 
     public void Attack()
@@ -126,6 +131,11 @@ public abstract class Range : MonoBehaviour
         {
             Target = null;
         }
+    }
+
+    public virtual string GetStats()
+    {
+        return string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2} \nDebuffs: {3}", Level, Damage, Proc, DebuffDuration);
     }
 
     public abstract Debuff GetDebuff();

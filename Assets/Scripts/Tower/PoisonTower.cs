@@ -24,6 +24,9 @@ public class PoisonTower : Range
     {
         base.Set();
         ElementType = ELEMENT.POISON;
-
+        Upgrades = new TowerUpgrade[] {
+            new TowerUpgrade(2,1,0.5f,-0.1f,1),
+            new TowerUpgrade(5,1,0.5f,-0.1f,1),
+        };
     }
 }

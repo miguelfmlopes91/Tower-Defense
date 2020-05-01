@@ -18,6 +18,12 @@ public class FireTower : Range
         Set();
         ElementType = ELEMENT.FIRE;
 
+        Upgrades = new TowerUpgrade[] {
+            new TowerUpgrade(2,2,0.5f,5,-0.1f,1),
+            new TowerUpgrade(5,3,0.5f,5,-0.1f,1),
+        };
+
+
     }
 
     public override Debuff GetDebuff()

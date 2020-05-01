@@ -18,6 +18,10 @@ public class IceTower : Range
     {
         base.Set();
         ElementType = ELEMENT.ICE;
+        Upgrades = new TowerUpgrade[] {
+            new TowerUpgrade(2,1,1,2,10),
+            new TowerUpgrade(2,1,1,2,20),
+        };
 
     }
 }

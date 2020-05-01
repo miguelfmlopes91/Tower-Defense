@@ -262,8 +262,22 @@ public class GameManager : Singleton<GameManager>
         statsPanel.SetActive(!statsPanel.activeSelf);
     }
 
+    public void ShowSelectedTowerUpgrades()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+        UpdateUpgradeTooltip();
+    }
+
     public void SetTooltipText(string text)
     {
         statsTxt.text = text;
+    }
+
+    public void UpdateUpgradeTooltip()
+    {
+        if (selectedTower!=null)
+        {
+            SetTooltipText(selectedTower.GetStats());
+        }
     }
 }

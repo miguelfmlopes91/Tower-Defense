@@ -13,5 +13,10 @@ public class StormTower : Range
     {
         Set();
         ElementType = ELEMENT.STORM;
+
+        Upgrades = new TowerUpgrade[] {
+            new TowerUpgrade(2,2,1,2),
+            new TowerUpgrade(5,3,1,2),
+        };
     }
 }
