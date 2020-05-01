@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class PoisonTower : Range
 {
+    public PoisonSplash splashPrefab;
+    [SerializeField]
+    private float tickTime;
+
+    [SerializeField]
+    private int splashDamage;
+
+
+    public int SplashDamage { get => splashDamage; set => splashDamage = value; }
+    public float TickTime { get => tickTime; set => tickTime = value; }
+
     public override Debuff GetDebuff()
     {
-        return new PoisonDebuff(Target);
+        return new PoisonDebuff(splashDamage,DebuffDuration, tickTime, splashPrefab, Target);
     }
 
     private void Start()
