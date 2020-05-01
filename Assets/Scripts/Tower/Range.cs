@@ -79,7 +79,7 @@ public abstract class Range : MonoBehaviour
             }
         }
 
-        if (Target == null && monstersQueue.Count > 0)
+        if (Target == null && monstersQueue.Count > 0 && monstersQueue.Peek().IsActive)
         {
             Target = monstersQueue.Dequeue();
         }

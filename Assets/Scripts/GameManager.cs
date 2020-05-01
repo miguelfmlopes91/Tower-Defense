@@ -45,6 +45,12 @@ public class GameManager : Singleton<GameManager>
     private GameObject upgradePanel;
     [SerializeField]
     private Text priceText;
+    [SerializeField]
+    private GameObject statsPanel;
+    [SerializeField]
+    private Text statsTxt;
+    [SerializeField]
+    private Text stats;
 
     private int health = 15;
 
@@ -253,5 +259,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void ShowStats()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+    }
 
+    public void SetTooltipText(string text)
+    {
+        stats.text = text;
+        statsTxt.text = text;
+    }
 }
