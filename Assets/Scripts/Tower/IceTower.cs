@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class IceTower : Range
 {
+    [SerializeField]
+    private float slowingFactor;
+
     public override Debuff GetDebuff()
     {
-        return new IceDebuff(Target);
+        return new IceDebuff(slowingFactor, DebuffDuration, Target);
     }
 
     private void Start()

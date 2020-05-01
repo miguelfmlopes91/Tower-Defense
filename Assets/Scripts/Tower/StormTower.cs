@@ -6,7 +6,7 @@ public class StormTower : Range
 {
     public override Debuff GetDebuff()
     {
-        return new StormDebuff(Target);
+        return new StormDebuff(Target, DebuffDuration);
     }
 
     private void Start()

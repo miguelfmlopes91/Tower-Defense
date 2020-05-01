@@ -7,6 +7,8 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    public float MaxSpeed { get; set; }
+
     private Stack<Node> path;
 
     private List<Debuff> debuffs = new List<Debuff>();
@@ -27,6 +29,7 @@ public class Monster : MonoBehaviour
         get =>  healthStat.CurrentValue > 0;
     }
     public ELEMENT ElementType { get => elementType; set => elementType = value; }
+    public float Speed { get => speed; set => speed = value; }
 
     private Animator myAnimator;
 
@@ -43,6 +46,7 @@ public class Monster : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         healthStat.Initialize();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        MaxSpeed = speed;
     }
 
     private void Update()
@@ -89,7 +93,7 @@ public class Monster : MonoBehaviour
         if (IsActive)
         {
             //destination is just next tile
-            transform.position = Vector2.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, destination, Speed * Time.deltaTime);
 
             if (transform.position == destination)
             {
