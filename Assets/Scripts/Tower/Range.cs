@@ -42,12 +42,23 @@ public abstract class Range : MonoBehaviour
     public float Proc { get => proc; set => proc = value; }
     public TowerUpgrade[] Upgrades { get; protected set; }
     public int Level { get => level; set => level = value; }
+    public TowerUpgrade NextUpgrade {
+        get{
+            if (Upgrades.Length > Level - 1)
+            {
+                return Upgrades[Level - 1];
+            }
+            return null;
+            }
+        set { }
+    }
 
     // Use this for initialization
     void Awake()
     {
         Set();
         myAnimator = transform.parent.GetComponent<Animator>();
+        level = 1;
     }
 
     protected void Set() {
@@ -135,7 +146,12 @@ public abstract class Range : MonoBehaviour
 
     public virtual string GetStats()
     {
-        return string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2} \nDebuffs: {3}", Level, Damage, Proc, DebuffDuration);
+        if (NextUpgrade != null)
+        {
+            return string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff> +{4}</color>\nProc: {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3}sec <color=#00ff00ff>+{6}</color>", Level, damage, proc, DebuffDuration, NextUpgrade.Damage, NextUpgrade.ProcChanche, NextUpgrade.DebuffDuration);
+        }
+
+        return string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3}sec", Level, damage, proc, DebuffDuration);
     }
 
     public abstract Debuff GetDebuff();

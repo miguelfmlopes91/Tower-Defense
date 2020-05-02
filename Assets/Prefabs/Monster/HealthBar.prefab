@@ -165,10 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19455ec4a6a734c1aa967d64a430736e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpSpeed: 5
+  lerpSpeed: 100
   content: {fileID: 114802593306958414}
   valueText: {fileID: 114968628923678992}
-  fullColor: {r: 0, g: 0, b: 0, a: 0}
+  fullColor: {r: 0.96420634, g: 1, b: 0, a: 0}
   lowColor: {r: 0, g: 0, b: 0, a: 0}
   lerpColors: 0
 --- !u!1 &1642354625778562
