@@ -41,4 +41,11 @@ public class FireTower : Range
         //Returns the current upgrade
         return string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}\nTick damage: {3}", "<size=20><b>Fire</b></size> ", base.GetStats(), TickTime, TickDamage);
     }
+
+    public override void Upgrade()
+    {
+        tickTime -= NextUpgrade.TickTime;
+        tickDamage -= NextUpgrade.SpecialDamage;
+        base.Upgrade();
+    }
 }

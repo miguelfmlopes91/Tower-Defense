@@ -31,6 +31,13 @@ public class PoisonTower : Range
 
     }
 
+    public override void Upgrade()
+    {
+        splashDamage -= NextUpgrade.SpecialDamage;
+        tickTime -= NextUpgrade.TickTime;
+        base.Upgrade();
+    }
+
     private void Start()
     {
         base.Set();

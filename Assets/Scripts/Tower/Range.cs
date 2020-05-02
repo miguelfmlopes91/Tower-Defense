@@ -73,14 +73,8 @@ public abstract class Range : MonoBehaviour
 
     public void Select()
     {
-        myAnimator = transform.parent.GetComponent<Animator>();
-
-        if (myAnimator == null) {
-            print("MY ANIMATOR IS NULL");
-        }
-
         spriteRenderer.enabled = !spriteRenderer.enabled;
-
+        GameManager.Instance.UpdateUpgradeTooltip();
     }
 
     public void Attack()
@@ -155,4 +149,15 @@ public abstract class Range : MonoBehaviour
     }
 
     public abstract Debuff GetDebuff();
+
+    public virtual void Upgrade()
+    {
+        GameManager.Instance.Currency -= NextUpgrade.Price;
+        Price += NextUpgrade.Price;
+        damage += NextUpgrade.Damage;
+        proc += NextUpgrade.ProcChanche;
+        debuffDuration += NextUpgrade.DebuffDuration;
+        Level++;
+        GameManager.Instance.UpdateUpgradeTooltip();
+    }
 }

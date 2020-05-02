@@ -25,6 +25,12 @@ public class IceTower : Range
         return string.Format("<color=#00ffffff>{0}</color>{1} \nSlowing factor: {2}%", "<size=20><b>Frost</b></size>", base.GetStats(), SlowingFactor);
     }
 
+    public override void Upgrade()
+    {
+        slowingFactor -= NextUpgrade.SlowingFactor;
+        base.Upgrade();
+    }
+
     private void Start()
     {
         base.Set();

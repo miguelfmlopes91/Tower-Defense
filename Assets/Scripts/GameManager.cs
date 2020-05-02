@@ -49,6 +49,8 @@ public class GameManager : Singleton<GameManager>
     private GameObject statsPanel;
     [SerializeField]
     private Text statsTxt;
+    [SerializeField]
+    private Text upgradePriceTxt;
 
     private int health = 15;
 
@@ -138,7 +140,7 @@ public class GameManager : Singleton<GameManager>
         selectedTower = tower;
         selectedTower.Select();
 
-        priceText.text = "+ " + (selectedTower.Price/2).ToString();
+        priceText.text = "+ " + (selectedTower.Price/2).ToString() + "$";
 
         upgradePanel.SetActive(true);
     }
@@ -277,7 +279,29 @@ public class GameManager : Singleton<GameManager>
     {
         if (selectedTower!=null)
         {
+            priceText.text = "+" + (selectedTower.Price / 2).ToString() + " $";
             SetTooltipText(selectedTower.GetStats());
         }
+
+        if (selectedTower.NextUpgrade!= null)
+        {
+            upgradePriceTxt.text = selectedTower.NextUpgrade.Price.ToString() + " $";
+        }
+        else
+        {
+            upgradePriceTxt.text = string.Empty;
+        }
     }
+
+    public void UpgradeTower()
+    {
+        if (selectedTower!=null)
+        {
+            if (selectedTower.Level <= selectedTower.Upgrades.Length && Currency >= selectedTower.NextUpgrade.Price)
+            {
+                selectedTower.Upgrade();
+            }
+        }
+    }
+
 }
